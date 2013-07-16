@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7" />
+        <title>Drug Discovery & Development</title>
+        <link rel="stylesheet" type="text/css" href="styles/dddstyle.css" media="screen" title="CSS" charset="utf-8" />
+        <link rel="stylesheet" href="styles/jquery.maximage.css" type="text/css" media="screen" title="CSS" charset="utf-8" />
+        
+       	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+		<script src="js/jquery.cycle.all.js" type="text/javascript"></script>
+        <script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+        <script src="js/jquery.maximage.js" type="text/javascript"></script>
+        
+       	<!--<script type="text/javascript" src="js/jquery.js"></script> -->
+        <script type="text/javascript">
+			// TOUCH-EVENTS SINGLE-FINGER SWIPE-SENSING JAVASCRIPT
+			// Courtesy of PADILICIOUS.COM and MACOSXAUTOMATION.COM
+			
+			// this script can be used with one or more page elements to perform actions based on them being swiped with a single finger
+			
+			var index = 0;
+			var widthsArray = [0, 1060, 1960, 1960, 3260, 3260, 3260, 4560, 4560, 5660, 5660, 6860, 7160];
+			var windowWidth = $(window).width();
+			var windowHeight = $(window).height();
+			
+			var triggerElementID = null; // this variable is used to identity the triggering element
+			var fingerCount = 0;
+			var startX = 0;
+			var startY = 0;
+			var curX = 0;
+			var curY = 0;
+			var deltaX = 0;
+			var deltaY = 0;
+			var horzDiff = 0;
+			var vertDiff = 0;
+			var minLength = 72; // the shortest distance the user may swipe
+			var swipeLength = 0;
+			var swipeAngle = null;
+			var swipeDirection = null;
+			
+			// The 4 Touch Event Handlers
+			
+			// NOTE: the touchStart handler should also receive the ID of the triggering element
+			// make sure its ID is passed in the event call placed in the element declaration, like:
+			// <div id="picture-frame" ontouchstart="touchStart(event,'picture-frame');"  ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+		
+			function touchStart(event,passedName) {
+				// disable the standard ability to select the touched object
+				event.preventDefault();
+				// get the total number of fingers touching the screen
+				fingerCount = event.touches.length;
+				// since we're looking for a swipe (single finger) and not a gesture (multiple fingers),
+				// check that only one finger was used
+				if ( fingerCount == 1 ) {
+					// get the coordinates of the touch
+					startX = event.touches[0].pageX;
+					startY = event.touches[0].pageY;
+					// store the triggering element ID
+					triggerElementID = passedName;
+				} else {
+					// more than one finger touched so cancel
+					touchCancel(event);
+				}
+			}
+		
+			function touchMove(event) {
+				event.preventDefault();
+				if ( event.touches.length == 1 ) {
+					curX = event.touches[0].pageX;
+					curY = event.touches[0].pageY;
+				} else {
+					touchCancel(event);
+				}
+			}
+			
+			function touchEnd(event) {
+				event.preventDefault();
+				// check to see if more than one finger was used and that there is an ending coordinate
+				if ( fingerCount == 1 && curX != 0 ) {
+					// use the Distance Formula to determine the length of the swipe
+					swipeLength = Math.round(Math.sqrt(Math.pow(curX - startX,2) + Math.pow(curY - startY,2)));
+					// if the user swiped more than the minimum length, perform the appropriate action
+					if ( swipeLength >= minLength ) {
+						caluculateAngle();
+						determineSwipeDirection();
+						processingRoutine();
+						touchCancel(event); // reset the variables
+					} else {
+						touchCancel(event);
+					}	
+				} else {
+					touchCancel(event);
+				}
+			}
+		
+			function touchCancel(event) {
+				// reset the variables back to default values
+				fingerCount = 0;
+				startX = 0;
+				startY = 0;
+				curX = 0;
+				curY = 0;
+				deltaX = 0;
+				deltaY = 0;
+				horzDiff = 0;
+				vertDiff = 0;
+				swipeLength = 0;
+				swipeAngle = null;
+				swipeDirection = null;
+				triggerElementID = null;
+			}
+			
+			function caluculateAngle() {
+				var X = startX-curX;
+				var Y = curY-startY;
+				var Z = Math.round(Math.sqrt(Math.pow(X,2)+Math.pow(Y,2))); //the distance - rounded - in pixels
+				var r = Math.atan2(Y,X); //angle in radians (Cartesian system)
+				swipeAngle = Math.round(r*180/Math.PI); //angle in degrees
+				if ( swipeAngle < 0 ) { swipeAngle =  360 - Math.abs(swipeAngle); }
+			}
+			
+			function determineSwipeDirection() {
+				if ( (swipeAngle <= 45) && (swipeAngle >= 0) ) {
+					swipeDirection = 'left';
+				} else if ( (swipeAngle <= 360) && (swipeAngle >= 315) ) {
+					swipeDirection = 'left';
+				} else if ( (swipeAngle >= 135) && (swipeAngle <= 225) ) {
+					swipeDirection = 'right';
+				} else if ( (swipeAngle > 45) && (swipeAngle < 135) ) {
+					swipeDirection = 'down';
+				} else {
+					swipeDirection = 'up';
+				}
+			}
+			
+			function processingRoutine() {
+				var swipedElement = document.getElementById(triggerElementID);
+				if ( swipeDirection == 'left' ) {
+					// REPLACE WITH YOUR ROUTINES
+					scrollRight();
+				} else if ( swipeDirection == 'right' ) {
+					// REPLACE WITH YOUR ROUTINES
+					scrollLeft();
+				} else if ( swipeDirection == 'up' ) {
+					// REPLACE WITH YOUR ROUTINES
+				} else if ( swipeDirection == 'down' ) {
+					// REPLACE WITH YOUR ROUTINES
+				}
+			}
+		
+			$("document").ready( function () {
+				<!--$("#contentIframe").width("10770px");-->
+				<!--$("#leftArrow").click(scrollLeft);-->
+				$("#leftArrow").mouseover(mouseOver);
+				$("#leftArrow").mouseout(mouseOut);
+				<!--$("#rightArrow").click(scrollRight);-->
+				$("#rightArrow").mouseover(mouseOver);
+				$("#rightArrow").mouseout(mouseOut);
+				
+				//UNCOMMENT THIS???
+				//$("#document").touchwipe({wipeLeft: scrollLeft, wipeRight: scrollRight});
+			});
+			
+			<!-- THESE ARE THE IMPORTANT FUNCTIONS!    THESE ARE THE IMPORTANT FUNCTIONS!    THESE ARE THE IMPORTANT FUNCTIONS! -->
+			
+			function scrollLeft () {
+				if (index > 0) {
+					$("#slide" + (index + 1)).animate({opacity: 0.4}, 1000, "swing");
+					index--;
+					var slideWidth = widthsArray[index + 2] - widthsArray[index + 1];
+					if (widthsArray[index + 2] != widthsArray[index + 1]) {
+						var nextLowerNumber;
+						var scrollToX;
+						var slideWidth;
+						var offset;
+						for (var i = index; i >=0; i--) {
+							if (widthsArray[index + 1] > widthsArray[i]) {
+								slideWidth = widthsArray[index + 1] - widthsArray[i];
+								offset = (windowWidth - slideWidth) / 2;
+								scrollToX = 0 - (widthsArray[i] - offset);
+								break;
+							}
+						}
+						$("#contentDiv").animate({left: scrollToX}, {duration:500}, "swing");
+					}
+					$("#slide" + (index + 2)).animate({opacity: 0.4}, 500, "swing");
+					$("#slide" + (index + 1)).animate({opacity: 1}, 500, "swing"); 
+					var oneSection = (windowWidth - 15) / 13;
+					var dotScrollTo;
+					if (index <= 5) {
+						dotScrollTo = (oneSection * index);
+					} else if (index > 5 && index < 10) {
+						dotScrollTo = (oneSection * 5) + ((index - 5) * (oneSection * 1.5));
+					} else {
+						dotScrollTo = (oneSection * 5) + (4 * (oneSection * 1.5)) + ((index - 9) * oneSection);
+					}
+					console.log("dotScrollTo = " + dotScrollTo);
+					$("#dot").animate({left: dotScrollTo}, 500, "swing");
+					$('#maximage').cycle('prev');
+				}
+			}
+			
+			function scrollRight () {
+				if (index < (widthsArray.length - 2)) {
+					$("#slide" + (index + 1)).animate({opacity: 0.4}, 1000, "swing");
+					index++;
+					var slideWidth = widthsArray[index+1] - widthsArray[index];
+					var offset = (windowWidth - slideWidth) / 2;
+					if (widthsArray[index+1] != widthsArray[index]) {
+						var scrollToX = 0 - (widthsArray[index] - offset);
+					} else {
+						var slideWidth = widthsArray[index + 1];
+					}
+					$("#contentDiv").animate({left: scrollToX}, {duration:500}, "swing");
+					$("#slide" + (index + 2)).animate({opacity: 0.4}, 500, "swing");
+					$("#slide" + (index + 1)).animate({opacity: 1}, 500, "swing"); 
+					var oneSection = (windowWidth - 15) / 13;
+					var dotScrollTo;
+					if (index <= 5) {
+						dotScrollTo = (oneSection * index);
+					} else if (index > 5 && index < 10) {
+						dotScrollTo = (oneSection * 5) + ((index - 5) * (oneSection * 1.5));
+					} else {
+						dotScrollTo = (oneSection * 5) + (4 * (oneSection * 1.5)) + ((index - 9) * oneSection);
+					}
+					console.log("dotScrollTo = " + dotScrollTo);
+					$("#dot").animate({left: dotScrollTo}, 500, "swing");
+					$('#maximage').cycle('next');
+				}
+			}
+			
+			function resizeFunction () {
+				windowWidth = $(window).width();
+				windowHeight = $(window).height();
+				if (windowHeight >= 900) {
+					for (var i = 1; i < widthsArray.length; i++) {
+						$("#slide" + i).height(windowHeight - 315);
+					}
+				}
+				var oneSection = (windowWidth - 15) / 13;
+				$("#dot").animate({left: oneSection * index}, 0);
+			}
+			
+			<!-- END    END    END    END    END    END    END    END    END    END    END    END    END    END    END    END -->
+			
+			function mouseOver (event) {
+				$(event.target).css("opacity", "0.8");
+			}
+			
+			function mouseOut () {
+				$(event.target).css("opacity", "1");
+			}
+		</script>
+        
+    </head>
+    
+    <body onResize="resizeFunction()">
+    
+    	<div id="maximage">
+			<img src="images/01.jpg" alt="" width="1920" height="1080" class="first-item"/>
+            <img src="images/02.jpg" alt="" width="1920" height="1080" class="first-item"/>
+            <img src="images/03.jpg" alt="" width="1920" height="1080" class="first-item"/>
+            <img src="images/04.jpg" alt="" width="1920" height="1080" class="first-item"/>
+            <img src="images/05.jpg" alt="" width="1920" height="1080" class="first-item"/>
+           <!-- <img src="images/06.jpg" alt="" width="1920" height="1080" class="first-item"/>-->
+            <img src="images/07.jpg" alt="" width="1920" height="1080" class="first-item"/>
+            <img src="images/08.jpg" alt="" width="1920" height="1080" class="first-item"/>
+            <img src="images/09.jpg" alt="" width="1920" height="1080" class="first-item"/>
+            <!--<img src="images/10.jpg" alt="" width="1920" height="1080" class="first-item"/>
+            <img src="images/11.jpg" alt="" width="1920" height="1080" class="first-item"/>
+            <img src="images/12.jpg" alt="" width="1920" height="1080" class="first-item"/>-->
+            <img src="images/13.jpg" alt="" width="1920" height="1080" class="first-item"/>
+            <img src="images/14.jpg" alt="" width="1920" height="1080" class="first-item"/>
+		</div>     
+    
+    	<div id="mainContainer">
+    
+            <div class="header">
+                <img class="bayerLogo" src="images/logo.gif" alt="Bayer logo" width="64" height="64" />
+                <h1 class="moduleTitle">Drug Discovery & Development</h1>
+            </div>
+            <!---->
+            <div class="contentHolder" id="contentHolder" ontouchstart="touchStart(event,'contentHolder');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+            	
+                <div class="content" id="contentDiv">
+                
+                    <div class="intro">
+                    	<h3 class="intro">Drug Discovery & Development</h3>
+                    	<div id="slide1">
+                            <p>Drug Discovery & Development is the process followed to get a clinical drug - for use in humans - from the laboratory to the marketplace, thus making the treatment available to individuals.</p>
+                            <img src="images/chart.png" alt="Development chart" width="960" height="363" />
+                            <p>The entire process can take 12 years on average and can cost 2 billion Euros, consisting of costs both directly and indirectly accountable to the drug development project.</p>
+                            <p>The steps of the Drug Discovery & Development process are very strictly governed and regulated in order to ensure that only products which are both safe and effective are brought to market.</p>
+                            <p>Use the next button or the slider below to navigate through the different stages of Drug Discovery & Development.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="research">
+                    	<h3 class="research">Research</h3>
+                    	<div class="defaultSlide" id="slide2">
+                            <p>Research can be divided into three main phases:</p>
+                            <ul>
+                                <li>Target Discovery</li>
+                                <li>Lead Generation</li>
+                                <li>Lead Optimization</li>
+                            </ul>
+                            <p>They are mainly driven by chemical and pharmaceutical activities and build the basis of the beginning for a drug discovery project.</p>
+                        </div>
+                        <div class="defaultSlide" id="slide3">
+                        	<p>Research for one specific therapeutic drug may start with up to 10,000 substances.</p>
+                            <p>The discovery to find a potential clinical drug begins in the laboratory.</p>
+                            <p>The first step of any drug discovery activity is 'target' identification and validation. This is the step where cellular or genetic factors that play a key role in a specific disease are identified.</p>
+                            <p>Chemists now become involved in analyzing and adapting the molecular structure of potential candidates in order to maximize the opportunities for maximum beneficial effect on the target.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="preclinical">
+                        <h3 class="preclinical">Pre-Clinical</h3>
+                        
+                        <div class="defaultSlide" id="slide4">
+                        	<p>Pre-Clinical Development involving up to 250 of the original 10,000 substances.</p>
+                        </div>
+                        
+                        <div class="defaultSlide" id="slide5">
+                        	<p>Pre-Clinical Development involves an extensive and lengthy series of tests in animals and in vitro experiments performed in the laboratory, prior to the candidate being tested in humans. Pre-Clinical Development involves an extensive and lengthy series of tests in animals and in vivo experiments performed in the laboratory, prior to the candidate being tested in humans.</p>
+                        </div>
+                        
+                        <div class="defaultSlide" id="slide6">
+                        	<p>This early research provides a first answer to the question concerning whether all potential drug candidates that are further developed are safe for humans. It provides vital information on what the body does to the drug in terms of absorption, distribution, metabolism and excretion of the drug and also how the drug will be formulated and manufactured.</p>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="clinical">
+                        <h3 class="clinical">Clinical</h3>
+                        
+                        <div class="defaultSlide" style="width:550px" id="slide7">
+                        	<h2>Clinical Studies</h2>
+                            <p>Once Pre-Clinical Development of a candidate has shown a strong profile for safety and efficacy, the next stage is to undertake a complex series of clinical studies in healthy volunteers and patients.</p>
+                            <p>The aim of clinical studies is to determine whether a new drug is above all safe, and is effective in the treatment of the target disease.</p>
+                            <p>Additionally, clinical studies can shed light on the economic, social and ethical implications of the medical technology and ensures that drug development decisions and market access strategies are based on a robust understanding of the Health Technology Assessment organizations and payer’s requirements.</p>
+                        </div>
+                        
+                        <div class="defaultSlide" style="width:550px" id="slide8">
+                            <h2>Study of Human Pharmacology (Phase I)</h2>
+                            <p>Phase I is carried out with up to 5 of the original 10,000 substances.  It has been shown that over 99% of the original substances are not suitable for further development.</p>
+                            <p>Phase I clinical studies are the first step in testing a new clinical drug in humans. In these studies, researchers evaluate what dose of the drug is safe, how a new drug should be administered (e.g. orally or by injection) and how frequently (e.g. three times a day). The researchers watch very closely for any side-effects that the volunteer may experience.</p>
+                            <p>For some target diseases, it is unethical to conduct Phase I studies in healthy volunteers, due to the toxic side-effects of the Candidate, such as clinical drugs developed to treat HIV and Cancer. Therefore, Phase I studies in these clinical drugs will be carried out in patients who have the target disease.</p>
+                            <p>During a clinical study, blood samples, clinical drug excretion characteristics, together with positive and negative effects of the drug are all monitored. This information is used to establish how the clinical drug behaves in the human body. An early signal of the clinical drug activity in humans may be seen.</p>
+                        </div>
+                        
+                        <div class="defaultSlide" style="width:550px" id="slide9">
+                            <h2>Clinical Studies - Exploring the Drug for the Target Disease  (Phase II)</h2>
+                            <p>Phase II is carried out using 3 of the original 10,000 substances.</p>
+                            <p>Phase II clinical studies assess the safety and efficacy of a clinical drug, and evaluate how it affects the human body. This usually focuses on a particular target disease (medical condition).</p>
+                            <p>In phase II clinical studies, the drug is given to a small number of people with the target disease, so that the therapeutic efficacy of the drug can be observed. The data from these patient studies is compared to data from the Phase I clinical studies involving healthy participants, and any variations in behaviour of the clinical drug when the target disease is present, are noted.</p>
+                            <p>The re-evaluation of the pharmacokinetic and excretion data will often result in an optimal dosage of the clinical drug being established.</p>
+                            <p>There is also a so called 'Point of Transition' period. At the end of this period the uncertainties around the project have been sufficiently reduced by data from studies such as those conducted by Chemistry Manufacturing and Control, pre-clinical studies and clinical studies, and it is scientifically justified for the company to further invest in further Phase II if necessary and then Phase III studies in a larger population of patients.</p>					
+                        </div>
+                        
+                        <div class="defaultSlide" style="width:550px" id="slide10">
+                            <h2>Clinical Studies - Confirmation of Therapeutic Safety and Benefit (Phase III)</h2>
+                            <p>Thousands of patients across several countries are recruited for Phase III clinical studies which are carried out to establish the efficacy of the clinical drug in a larger patient population, and also to monitor any side-effects of the clinical drug compared to any established treatments.</p>
+                            <p>As well as studying the safety and efficacy of the new clinical drug, comparisons are often also made with placebo and alternative treatments during Phase III clinical studies, in order to demonstrate an improved risk:benefit ratio.</p>
+                            <p>In addition, Phase III clinical studies may also be carried out to assess the effects of the clinical drug on (for example) young and old patients, different stages of the target disease if relevant, or in combination with other drugs so that safe dosage levels can be established in these groups.</p>
+                            <p>This is the busiest and most intensive phase of any clinical studies programme. The analysis of the data from the studies will form the decision point for an application for the Product License and Marketing Authorization.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="approval">
+                        <h3 class="approval">Approval</h3>
+                        
+                        <div class="defaultSlide" style="width:850px" id="slide11">
+                        	<p>APPROVAL - APPLICATION FOR PRODUCT LICENSE<br/><br/>Application for approval with one substance.<br/><br/>The data from the Phase I through to Phase III clinical studies are evaluated and reports are produced.<br/><br/>These reports, also including the data from the pre-clinical studies, are then submitted to the Regulatory Authorities for evaluation by a team of experts.<br/><br/>The data will need to be submitted to the Regulatory Authority in each country within which the Company wants to market the new clinical drug.<br/><br/>If a new clinical drug is considered to be effective and safe, a Product License will be granted to the Company to allow them to market the clinical drug.</p><br/>
+                            <p>POST-MARKETING - POST-MARKETING STUDIES (PHASE IV)<br/><br/>Once a Company has been granted a Product License, further research into the clinical drug is still required. Phase IV clinical studies are usually undertaken in close collaboration with the Company's marketing department. The aim is usually to evaluate further the safety and efficacy of the new drug in much larger numbers of people, and under "real life" conditions.<br/><br/>Another reason for performing further clinical studies is to explore and extend the range of target diseases for which the drug may be used. Also, further knowledge is gained about aspects of the drug such as epidemiological data, pharmaco-epidemiological information, and Health-Economics and outcomes data.<br/><br/>If any additional target diseases are identified for which the new clinical drug may be used to treat, appropriate clinical studies are required first, in order to update and obtain approval for the new Product License.</p>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="summary">
+                        <h3 class="intro">Summary</h3>
+                        
+                        <div class="defaultSlide" id="slide12">
+                        	<p>The following learning outcomes should have been covered as part of this module. You should now:</p>
+                            <ul>
+                                <li>Be aware of the generic chronological steps in the Drug Discovery & Development process and the key activities involved at each stage</li>
+                                <li>Be aware of the process of getting a clinical drug from the laboratory to the market</li>
+                                <li>Be aware of the time and costs involved in the process</li>
+                            </ul>
+                            <!--<p>In order to complete the training, click the 'complete' button below.</p>
+                            <p align="center"><a href="http://www.google.com" target="_blank" onmouseover="image2.src='images/complete_mouseover.png';" onmouseout="image2.src='images/complete_active.png';"><img name="image2" src="images/complete_active.png" border=0 width="150" height="83"/></a></p>-->
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="leftArrow" id="leftArrow">
+                <a href="javascript:scrollLeft()"><img class="vmiddle" src="images/leftArrow.gif" alt="Left arrow" width="88" height="176" /></a>
+            </div>
+            
+            <div class="rightArrow" id="rightArrow">
+                <a href="javascript:scrollRight()"><img class="vmiddle" src="images/rightArrow.gif" alt="Right arrow" width="88" height="176" /></a>
+            </div>
+            
+            <div class="footer">
+            	<span class="introSection"></span>
+                <span class="researchSection"></span>
+                <span class="preclinical"></span>
+                <span class="clinical"></span>
+                <span class="approval"></span>
+                <span class="summarySection"></span>
+                <div class="playhead" id="dot"><!--<img src="images/dot.png" />--></div>
+            </div>
+        
+        </div>
+        
+        <script type="text/javascript" charset="utf-8">
+			for (var i = 2; i < widthsArray.length; i++) {
+				$("#slide" + i).animate({opacity:0.4}, 0);
+			}
+			for (var i = 1; i < widthsArray.length; i++) {
+				$("#slide" + i).height(windowHeight - 315);
+			}
+		
+			jQuery('#maximage').hide();
+			
+			$('#maximage').maximage({
+				cycleOptions: {
+					fx: 'fade',
+					// Speed has to match the speed for CSS transitions
+					speed: 1000, 
+					timeout: 0,
+					//prev: '#rightArrow',
+					//next: '#leftArrow',
+					pause: 1
+				},
+				onFirstImageLoaded: function(){
+					jQuery('#maximage').fadeIn(1000);
+				},
+				// cssBackgroundSize might be causing choppiness in retina display safari
+				cssBackgroundSize: false
+			});
+			
+			var slideWidth = widthsArray[index+1] - widthsArray[index];
+			var offset = (windowWidth - slideWidth) / 2;
+			var scrollToX = 0 - (widthsArray[index] - offset);
+			$("#contentDiv").hide();
+			$("#contentDiv").animate({left: scrollToX}, 0);
+			$("#contentDiv").fadeIn(1000);
+		</script>
+    
+    </body>
+
+</html>

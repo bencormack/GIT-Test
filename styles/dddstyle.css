@@ -1,0 +1,360 @@
+@charset "UTF-8";
+/* CSS Document */
+
+html {
+	min-height: 100%;
+	/*max-height: 100%;*/
+	height:100%;
+	margin: 0px;
+	padding: 0px;
+	/*font-family: 'GeosansLightRegular';*/
+	/*font-size:20px;*/
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #444444;
+	/*overflow:hidden;*/
+}
+
+body {
+	position: fixed;
+	height:100%;
+	min-height:900px;
+	min-width:600px;
+	width:100%;
+	margin:0px;
+	padding:0px;
+	background-image: #ffffff; /* fallback/image non-cover color */
+	background-image: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#dddddd)); /* Chrome, Safari4+ */
+	background-image: -webkit-radial-gradient(center, 100% 100%, #ffffff, #dddddd);  /* Safari 5.1+, Mobile Safari, Chrome 10+ */
+	background-image: -moz-linear-gradient(center, #ffffff, #dddddd); /* Firefox 3.6+ */
+	background-image: -ms-linear-gradient(center, #ffffff, #dddddd); /* IE 10+ */
+	background-image: -o-linear-gradient(center, #ffffff, #dddddd); /* Opera 11.10+ */
+	/*overflow:hidden;*/
+}
+
+.mainContainer {
+	z-index:1;	
+}
+
+.header {
+	margin:0px;
+	padding:10px;
+	height:64px;
+	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+	filter:alpha(opacity=80);
+    background: rgba(255, 255, 255, .8);
+  	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	z-index:4;
+}
+
+.footer {
+	margin:0px;
+	padding:0px;
+	height:64px;
+	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+    background: rgba(255, 255, 255, .8);
+  	filter:alpha(opacity=60);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	z-index:3;
+	position:absolute;	
+	bottom:0px;
+	width:100%;
+	overflow:hidden;
+}
+
+.bayerLogo {
+	float:right;
+}
+
+.moduleTitle {
+	position:relative;
+	top:-10px;
+}
+
+div.playhead {
+	position:absolute;
+	z-index:1;	
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+    background: rgba(255, 255, 255, .8);
+  	filter:alpha(opacity=60);
+	width:15px;
+	height:64px;
+}
+
+image.vmiddle {
+	vertical-align:middle;
+}
+
+.leftArrow {
+	position:fixed;
+	left:0px;
+	top:35%;
+	margin:0;
+	padding:0;	
+	opacity:.8;
+	z-index:5;
+	border:none;
+}
+
+.rightArrow {
+	position:fixed;
+	right:0px;
+	top:35%;
+	margin:0;
+	padding:0;	
+	opacity:.8;
+	z-index:6;
+	border:none;
+}
+
+.contentHolder {
+	position:absolute;
+	top:84px;
+	bottom:64px;
+	seamless:true;
+	border:none;
+	overflow:hidden;
+	width:100%;
+	min-width:100%;
+	max-width:100%;
+}
+
+.content {
+	position:absolute;
+	width:10770px;
+	max-width:10770px;
+	min-width:10770px;
+	height:100%;
+	seamless:true;
+	border:none;
+	/*box-shadow: 0 0 20px rgba(0,0,0,0.2);*/
+}
+
+/* CONTENT FORMATING */
+
+h3 {
+	border-radius: 15px;
+	font-size:1.5em;
+	padding:20px;
+	margin:-20px -20px 20px -20px;
+	text-shadow:null;
+}
+
+h3.intro {
+	background: rgb(0, 0, 0);
+	filter:alpha(opacity=20);
+	background: rgba(0, 0, 0, .02);
+}
+
+h3.research {
+	background: rgb(70, 189, 45);
+	filter:alpha(opacity=50);
+	background: rgba(70, 189, 45, .5);
+}
+
+h3.preclinical {
+	background: rgb(253, 196, 74);
+	filter:alpha(opacity=50);
+	background: rgba(253, 196, 74, .5);
+}
+
+h3.clinical {
+	background: rgb(30, 129, 250);
+	filter:alpha(opacity=50);
+	background: rgba(30, 129, 250, .5);
+}
+
+h3.approval {
+	background: rgb(219, 48, 32);
+	filter:alpha(opacity=50);
+	background: rgba(219, 48, 32, .5);
+}
+
+div.intro {
+	border-radius: 15px;
+	padding:20px;
+	height:auto;
+	float:left;
+	margin:30px;
+	width:960px;
+	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+	filter:alpha(opacity=80);
+    background: rgba(255, 255, 255, .8);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	overflow:hidden;
+}
+
+div.research {
+	border-radius: 15px;
+	padding:20px;
+	width:800px;
+	height:auto;
+	float:left;
+	margin:30px;
+	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+	filter:alpha(opacity=80);
+    background: rgba(255, 255, 255, .8);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	overflow:hidden;
+}
+
+div.preclinical {
+	border-radius: 15px;
+	padding:20px;
+	width:1200px;
+	height:auto;
+	float:left;
+	margin:30px;
+	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+	filter:alpha(opacity=80);
+    background: rgba(255, 255, 255, .8);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	overflow:hidden;
+}
+
+div.clinical {
+	border-radius: 15px;
+	padding:20px;
+	width:2400px;
+	height:auto;
+	float:left;
+	margin:30px;
+	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+	filter:alpha(opacity=80);
+    background: rgba(255, 255, 255, .8);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	overflow:hidden;
+}
+
+div.approval {
+	border-radius: 15px;
+	padding:20px;
+	width:900px;
+	height:auto;
+	float:left;
+	margin:30px;
+	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+	filter:alpha(opacity=80);
+    background: rgba(255, 255, 255, .8);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	overflow:hidden;
+}
+
+div.summary {
+	border-radius: 15px;
+	padding:20px;
+	height:auto;
+	float:left;
+	margin:30px;
+	width:400px;
+	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+	filter:alpha(opacity=80);
+    background: rgba(255, 255, 255, .8);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	overflow:hidden;
+}
+
+div.defaultSlide {
+	width:350px;
+	float:left;
+	padding:0px 25px;
+	margin:0px;	
+}
+
+
+/* -------------------------------------------------------------------------------- */
+
+/* FOOTER FORMATING */
+
+span.introSection {
+	position:absolute;
+	margin-top:0px;
+	margin-right:92.85714286%;
+	width:7.14285714%;
+	background: rgb(255, 255, 255);
+	height:100%;
+	box-shadow:inset 0 0 40px rgba(0,0,0,0.2);
+}
+
+span.summarySection {
+	position:absolute;
+	margin-top:0px;
+	margin-left:92.85714286%;
+	margin-right:0%;
+	width:7.14285714%;
+	background: rgb(255, 255, 255);
+	height:100%;
+	box-shadow:inset 0 0 40px rgba(0,0,0,0.2);
+}
+
+span.researchSection {
+	position:absolute;
+	float:left;
+	width:14.2857143%;
+	margin-top:0px;
+	margin-left:7.14285714%;
+	margin-right:78.5714285;
+	background: rgb(70, 189, 45);
+	height:100%;
+	box-shadow:inset 0 0 40px rgba(0,0,0,0.2);
+}
+
+span.preclinical {
+	position:absolute;
+	float:left;
+	height:100%;
+	width:21.4285714%;
+	margin-top:0px;
+	margin-left:21.4285714%;
+	margin-right:57.1428572%;
+	background: rgb(253, 196, 74);
+	box-shadow:inset 0 0 40px rgba(0,0,0,0.2);
+}
+
+span.clinical {
+	position:absolute;
+	float:left;
+	height:100%;
+	width:42.8571428%;
+	margin-top:0px;
+	margin-left:42.8571428%;
+	margin-right:14.2857143%;
+	background: rgb(30, 129, 250);
+	box-shadow:inset 0 0 40px rgba(0,0,0,0.2);
+}
+
+span.approval {
+	position:absolute;
+	float:left;
+	height:100%;
+	width:7.14285714%;
+	margin-top:0px;
+	margin-left:85.7142857%;
+	margin-right:7.14285714%;
+	background: rgb(219, 48, 32);
+	box-shadow:inset 0 0 40px rgba(0,0,0,0.2);
+}
+
+/* -------------------------------------------------------------------------------- */
+
+@font-face {
+    font-family: 'GeosansLightRegular';
+    src: url('fonts/geosanslight-webfont.eot');
+    src: url('fonts/geosanslight-webfont.eot?#iefix') format('eot'),
+url('fonts/geosanslight-webfont.woff') format('woff'),
+url('fonts/geosanslight-webfont.ttf') format('truetype'),
+url('fonts/geosanslight-webfont.svg#webfontY02WmcuR') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GeosansLightMediumItalic';
+    src: url('fonts/geosanslight-oblique-webfont.eot');
+    src: url('fonts/geosanslight-oblique-webfont.eot?#iefix') format('eot'),
+url('fonts/geosanslight-oblique-webfont.woff') format('woff'),
+url('fonts/geosanslight-oblique-webfont.ttf') format('truetype'),
+url('fonts/geosanslight-oblique-webfont.svg#webfontNPsZNH0G') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
