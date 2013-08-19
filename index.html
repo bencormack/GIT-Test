@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-GB">
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7" />
         <title>Drug Discovery & Development</title>
-        <link rel="stylesheet" type="text/css" href="styles/dddstyle.css" media="screen" title="CSS" charset="utf-8" />
-        <link rel="stylesheet" href="styles/jquery.maximage.css" type="text/css" media="screen" title="CSS" charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="styles/dddstyle.css" />
+        <link rel="stylesheet" href="styles/jquery.maximage.css" type="text/css" media="screen" title="CSS" />
         
-       	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+       	<script src="js/jquery-1.8.3.js"></script>
 		<script src="js/jquery.cycle.all.js" type="text/javascript"></script>
         <script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
         <script src="js/jquery.maximage.js" type="text/javascript"></script>
@@ -23,7 +23,8 @@
 			var index = 0;
 			var widthsArray = [0, 1060, 1960, 1960, 3260, 3260, 3260, 4560, 4560, 5660, 5660, 6860, 7160];
 			var windowWidth = $(window).width();
-			var windowHeight = $(window).height();
+			var windowHeight = $(window).height(); //window.innerHeight || document.documentElement.clientHeight;
+			var browserType = String(navigator.appName);
 			
 			var triggerElementID = null; // this variable is used to identity the triggering element
 			var fingerCount = 0;
@@ -153,11 +154,11 @@
 			$("document").ready( function () {
 				<!--$("#contentIframe").width("10770px");-->
 				<!--$("#leftArrow").click(scrollLeft);-->
-				$("#leftArrow").mouseover(mouseOver);
-				$("#leftArrow").mouseout(mouseOut);
+				<!--$("#leftArrow").mouseover(mouseOver);-->
+				<!--$("#leftArrow").mouseout(mouseOut);-->
 				<!--$("#rightArrow").click(scrollRight);-->
-				$("#rightArrow").mouseover(mouseOver);
-				$("#rightArrow").mouseout(mouseOut);
+				<!--$("#rightArrow").mouseover(mouseOver);-->
+				<!--$("#rightArrow").mouseout(mouseOut);-->
 				
 				//UNCOMMENT THIS???
 				//$("#document").touchwipe({wipeLeft: scrollLeft, wipeRight: scrollRight});
@@ -169,6 +170,8 @@
 				if (index > 0) {
 					$("#slide" + (index + 1)).animate({opacity: 0.4}, 1000, "swing");
 					index--;
+					var newAudioHtml = "audio/" + (index + 1) + ".html";
+					window.open(newAudioHtml, "audioframe");
 					var slideWidth = widthsArray[index + 2] - widthsArray[index + 1];
 					if (widthsArray[index + 2] != widthsArray[index + 1]) {
 						var nextLowerNumber;
@@ -187,6 +190,9 @@
 					}
 					$("#slide" + (index + 2)).animate({opacity: 0.4}, 500, "swing");
 					$("#slide" + (index + 1)).animate({opacity: 1}, 500, "swing"); 
+					
+					$('#maximage').cycle('prev');
+					
 					var oneSection = (windowWidth - 15) / 13;
 					var dotScrollTo;
 					if (index <= 5) {
@@ -196,9 +202,8 @@
 					} else {
 						dotScrollTo = (oneSection * 5) + (4 * (oneSection * 1.5)) + ((index - 9) * oneSection);
 					}
-					console.log("dotScrollTo = " + dotScrollTo);
+					
 					$("#dot").animate({left: dotScrollTo}, 500, "swing");
-					$('#maximage').cycle('prev');
 				}
 			}
 			
@@ -206,6 +211,8 @@
 				if (index < (widthsArray.length - 2)) {
 					$("#slide" + (index + 1)).animate({opacity: 0.4}, 1000, "swing");
 					index++;
+					var newAudioHtml = "audio/" + (index + 1) + ".html";
+					window.open(newAudioHtml, "audioframe");
 					var slideWidth = widthsArray[index+1] - widthsArray[index];
 					var offset = (windowWidth - slideWidth) / 2;
 					if (widthsArray[index+1] != widthsArray[index]) {
@@ -216,6 +223,9 @@
 					$("#contentDiv").animate({left: scrollToX}, {duration:500}, "swing");
 					$("#slide" + (index + 2)).animate({opacity: 0.4}, 500, "swing");
 					$("#slide" + (index + 1)).animate({opacity: 1}, 500, "swing"); 
+					
+					$('#maximage').cycle('next');
+					
 					var oneSection = (windowWidth - 15) / 13;
 					var dotScrollTo;
 					if (index <= 5) {
@@ -225,59 +235,86 @@
 					} else {
 						dotScrollTo = (oneSection * 5) + (4 * (oneSection * 1.5)) + ((index - 9) * oneSection);
 					}
-					console.log("dotScrollTo = " + dotScrollTo);
+					
 					$("#dot").animate({left: dotScrollTo}, 500, "swing");
-					$('#maximage').cycle('next');
 				}
 			}
 			
 			function resizeFunction () {
 				windowWidth = $(window).width();
 				windowHeight = $(window).height();
-				if (windowHeight >= 900) {
+				
+				if (windowHeight >= 1000) {
 					for (var i = 1; i < widthsArray.length; i++) {
 						$("#slide" + i).height(windowHeight - 315);
 					}
+				} else {
+					for (var i = 1; i < widthsArray.length; i++) {
+						$("#slide" + i).height(685);
+					}
 				}
 				var oneSection = (windowWidth - 15) / 13;
-				$("#dot").animate({left: oneSection * index}, 0);
+				var dotScrollTo;
+				if (index <= 5) {
+					dotScrollTo = (oneSection * index);
+				} else if (index > 5 && index < 10) {
+					dotScrollTo = (oneSection * 5) + ((index - 5) * (oneSection * 1.5));
+				} else {
+					dotScrollTo = (oneSection * 5) + (4 * (oneSection * 1.5)) + ((index - 9) * oneSection);
+				}
+				
+				$("#dot").animate({left: dotScrollTo}, 0, "swing");
 			}
 			
 			<!-- END    END    END    END    END    END    END    END    END    END    END    END    END    END    END    END -->
 			
 			function mouseOver (event) {
-				$(event.target).css("opacity", "0.8");
+				<!--$(event.target).css("opacity", "0.8");-->
 			}
 			
 			function mouseOut () {
-				$(event.target).css("opacity", "1");
+				<!--$(event.target).css("opacity", "1");-->
 			}
 		</script>
         
     </head>
     
-    <body onResize="resizeFunction()">
+    <body>
     
-    	<div id="maximage">
-			<img src="images/01.jpg" alt="" width="1920" height="1080" class="first-item"/>
-            <img src="images/02.jpg" alt="" width="1920" height="1080" class="first-item"/>
-            <img src="images/03.jpg" alt="" width="1920" height="1080" class="first-item"/>
-            <img src="images/04.jpg" alt="" width="1920" height="1080" class="first-item"/>
-            <img src="images/05.jpg" alt="" width="1920" height="1080" class="first-item"/>
-           <!-- <img src="images/06.jpg" alt="" width="1920" height="1080" class="first-item"/>-->
-            <img src="images/07.jpg" alt="" width="1920" height="1080" class="first-item"/>
-            <img src="images/08.jpg" alt="" width="1920" height="1080" class="first-item"/>
-            <img src="images/09.jpg" alt="" width="1920" height="1080" class="first-item"/>
-            <!--<img src="images/10.jpg" alt="" width="1920" height="1080" class="first-item"/>
-            <img src="images/11.jpg" alt="" width="1920" height="1080" class="first-item"/>
-            <img src="images/12.jpg" alt="" width="1920" height="1080" class="first-item"/>-->
-            <img src="images/13.jpg" alt="" width="1920" height="1080" class="first-item"/>
-            <img src="images/14.jpg" alt="" width="1920" height="1080" class="first-item"/>
-		</div>     
+    	<iframe id="audioframe" name="audioframe" class="audioIframe" src="audio/1.html"></iframe>
+        
+        <div class="leftArrow" id="leftArrow">
+        	<a href="javascript:scrollLeft()" style="border:none"><img class="vmiddle" src="images/leftArrow.gif" alt="Left arrow" width="88" height="176" ></a>
+        </div>
+        
+        <div class="rightArrow" id="rightArrow">
+            <a href="javascript:scrollRight()" style="border:none"><img class="vmiddle" src="images/rightArrow.gif" alt="Right arrow" width="88" height="176" ></a>
+        </div>
+        
+        
+        
+        <!--[if gt IE 8]><!--><!--><!-- THIS TARGETS ALL BROWSERS EXCEPT FOR IE -->
+        	<div id="maximage">
+                <!--1--><img src="images/01.jpg" alt="" width="1920" height="1080" class="first-item"/>
+                <!--2--><img src="images/02.jpg" alt="" width="1920" height="1080" />
+                <!--3--><img src="images/03.jpg" alt="" width="1920" height="1080" />
+                <!--4--><img src="images/04.jpg" alt="" width="1920" height="1080" />
+                <!--5--><img src="images/05.jpg" alt="" width="1920" height="1080" />
+                <!--6--><img src="images/06.jpg" alt="" width="1920" height="1080" />
+                <!--7--><img src="images/07.jpg" alt="" width="1920" height="1080" />
+                <!--8--><img src="images/08.jpg" alt="" width="1920" height="1080" />
+                <!--9--><img src="images/09.jpg" alt="" width="1920" height="1080" />
+                <!--10--><img src="images/10.jpg" alt="" width="1920" height="1080" />
+                <!--11--><img src="images/13.jpg" alt="" width="1920" height="1080" />
+                <!--12--><img src="images/14.jpg" alt="" width="1920" height="1080" />
+            </div>  
+		<!--<![endif]-->
+    
+    	
     
     	<div id="mainContainer">
     
-            <div class="header">
+            <div class="header" id="headerID">
                 <img class="bayerLogo" src="images/logo.gif" alt="Bayer logo" width="64" height="64" />
                 <h1 class="moduleTitle">Drug Discovery & Development</h1>
             </div>
@@ -290,10 +327,16 @@
                     	<h3 class="intro">Drug Discovery & Development</h3>
                     	<div id="slide1">
                             <p>Drug Discovery & Development is the process followed to get a clinical drug - for use in humans - from the laboratory to the marketplace, thus making the treatment available to individuals.</p>
-                            <img src="images/chart.png" alt="Development chart" width="960" height="363" />
+                            <script type="text/javascript">
+								if ($.browser.msie && parseInt($.browser.version) < 9){
+									document.write("<img src='images/chart.jpg' alt='Development chart' width='960' height='363' />")
+								} else {
+									document.write("<img src='images/chart.png' alt='Development chart' width='960' height='363' />")
+								}
+							</script>
                             <p>The entire process can take 12 years on average and can cost 2 billion Euros, consisting of costs both directly and indirectly accountable to the drug development project.</p>
                             <p>The steps of the Drug Discovery & Development process are very strictly governed and regulated in order to ensure that only products which are both safe and effective are brought to market.</p>
-                            <p>Use the next button or the slider below to navigate through the different stages of Drug Discovery & Development.</p>
+                            <p>Use the next button to navigate through the different stages of Drug Discovery & Development.</p>
                         </div>
                     </div>
                     
@@ -324,7 +367,7 @@
                         </div>
                         
                         <div class="defaultSlide" id="slide5">
-                        	<p>Pre-Clinical Development involves an extensive and lengthy series of tests in animals and in vitro experiments performed in the laboratory, prior to the candidate being tested in humans. Pre-Clinical Development involves an extensive and lengthy series of tests in animals and in vivo experiments performed in the laboratory, prior to the candidate being tested in humans.</p>
+                        	<p>Pre-Clinical Development involves an extensive and lengthy series of tests in animals and in vitro experiments performed in the laboratory, prior to the candidate being tested in humans.</p>
                         </div>
                         
                         <div class="defaultSlide" id="slide6">
@@ -398,52 +441,49 @@
                 </div>
             </div>
             
-            <div class="leftArrow" id="leftArrow">
-                <a href="javascript:scrollLeft()"><img class="vmiddle" src="images/leftArrow.gif" alt="Left arrow" width="88" height="176" /></a>
-            </div>
-            
-            <div class="rightArrow" id="rightArrow">
-                <a href="javascript:scrollRight()"><img class="vmiddle" src="images/rightArrow.gif" alt="Right arrow" width="88" height="176" /></a>
-            </div>
-            
-            <div class="footer">
+            <div class="footer" id="footerID">
             	<span class="introSection"></span>
                 <span class="researchSection"></span>
                 <span class="preclinical"></span>
                 <span class="clinical"></span>
                 <span class="approval"></span>
                 <span class="summarySection"></span>
-                <div class="playhead" id="dot"><!--<img src="images/dot.png" />--></div>
+                <div class="playhead" id="dot"></div>
             </div>
         
         </div>
         
-        <script type="text/javascript" charset="utf-8">
+        <script type="text/javascript">
+		
+			document.body.onresize = resizeFunction;
+		
 			for (var i = 2; i < widthsArray.length; i++) {
 				$("#slide" + i).animate({opacity:0.4}, 0);
 			}
-			for (var i = 1; i < widthsArray.length; i++) {
-				$("#slide" + i).height(windowHeight - 315);
-			}
-		
-			jQuery('#maximage').hide();
 			
-			$('#maximage').maximage({
-				cycleOptions: {
-					fx: 'fade',
-					// Speed has to match the speed for CSS transitions
-					speed: 1000, 
-					timeout: 0,
-					//prev: '#rightArrow',
-					//next: '#leftArrow',
-					pause: 1
-				},
-				onFirstImageLoaded: function(){
-					jQuery('#maximage').fadeIn(1000);
-				},
-				// cssBackgroundSize might be causing choppiness in retina display safari
-				cssBackgroundSize: false
-			});
+			if ($.browser.msie && parseInt($.browser.version) < 9){
+				//You're using IE8 or below!
+			} else {
+				//You're using an OK browser
+				jQuery('#maximage').hide();
+				
+				$('#maximage').maximage({
+					cycleOptions: {
+						fx: 'fade',
+						// Speed has to match the speed for CSS transitions
+						speed: 1000, 
+						timeout: 0,
+						//prev: '#rightArrow',
+						//next: '#leftArrow',
+						pause: 1
+					},
+					onFirstImageLoaded: function(){
+						jQuery('#maximage').fadeIn(1000);
+					},
+					// cssBackgroundSize might be causing choppiness in retina display safari
+					cssBackgroundSize: false
+				});
+			}
 			
 			var slideWidth = widthsArray[index+1] - widthsArray[index];
 			var offset = (windowWidth - slideWidth) / 2;
@@ -451,6 +491,10 @@
 			$("#contentDiv").hide();
 			$("#contentDiv").animate({left: scrollToX}, 0);
 			$("#contentDiv").fadeIn(1000);
+			
+			resizeFunction();
+			
+			window.frames["audioframe"].location = "audio/" + (index + 1) + ".html";
 		</script>
     
     </body>

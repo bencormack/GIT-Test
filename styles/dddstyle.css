@@ -2,48 +2,52 @@
 /* CSS Document */
 
 html {
-	min-height: 100%;
-	/*max-height: 100%;*/
-	height:100%;
 	margin: 0px;
 	padding: 0px;
-	/*font-family: 'GeosansLightRegular';*/
-	/*font-size:20px;*/
 	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
 	color: #444444;
-	/*overflow:hidden;*/
+	overflow:auto;
 }
 
 body {
-	position: fixed;
+	position: absolute;
 	height:100%;
-	min-height:900px;
-	min-width:600px;
+	min-height:1000px;
 	width:100%;
+	min-width:600px;
 	margin:0px;
 	padding:0px;
-	background-image: #ffffff; /* fallback/image non-cover color */
+	background-image: url(../images/04.jpg);
 	background-image: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#dddddd)); /* Chrome, Safari4+ */
 	background-image: -webkit-radial-gradient(center, 100% 100%, #ffffff, #dddddd);  /* Safari 5.1+, Mobile Safari, Chrome 10+ */
 	background-image: -moz-linear-gradient(center, #ffffff, #dddddd); /* Firefox 3.6+ */
 	background-image: -ms-linear-gradient(center, #ffffff, #dddddd); /* IE 10+ */
 	background-image: -o-linear-gradient(center, #ffffff, #dddddd); /* Opera 11.10+ */
-	/*overflow:hidden;*/
+	overflow:auto;
 }
 
 .mainContainer {
-	z-index:1;	
+	z-index:1;
 }
 
 .header {
+	position:fixed;
 	margin:0px;
 	padding:10px;
 	height:64px;
+	width:100%;
+	min-width:100%;
+	max-width:100%;
 	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
-	filter:alpha(opacity=80);
-    background: rgba(255, 255, 255, .8);
-  	box-shadow: 0 0 20px rgba(0,0,0,0.2);
-	z-index:4;
+	filter:alpha(opacity=90);
+	background: rgba(255, 255, 255, .8);
+  	z-index:4;
+	/*shadow*/
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color='#888888')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=180, Color='#888888');
 }
 
 .footer {
@@ -52,17 +56,28 @@ body {
 	height:64px;
 	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
     background: rgba(255, 255, 255, .8);
-  	filter:alpha(opacity=60);
-	box-shadow: 0 0 20px rgba(0,0,0,0.2);
-	z-index:3;
-	position:absolute;	
+  	z-index:3;
+	position:fixed;	
 	bottom:0px;
 	width:100%;
 	overflow:hidden;
+	/*shadow*/
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=0, Color='#888888')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=0, Color='#888888');
+}
+
+.audioIframe {
+	position:absolute;
+	top:-1000px;
+	left:-1000px;
 }
 
 .bayerLogo {
-	float:right;
+	position:fixed;
+	right:30px;
 }
 
 .moduleTitle {
@@ -73,12 +88,14 @@ body {
 div.playhead {
 	position:absolute;
 	z-index:1;	
-	box-shadow: 0 0 20px rgba(0,0,0,0.2);
 	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
     background: rgba(255, 255, 255, .8);
-  	filter:alpha(opacity=60);
-	width:15px;
+  	width:15px;
 	height:64px;
+	/*shadow*/
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
 image.vmiddle {
@@ -91,9 +108,10 @@ image.vmiddle {
 	top:35%;
 	margin:0;
 	padding:0;	
-	opacity:.8;
-	z-index:5;
+	/*opacity:.8;*/
+	z-index:101;
 	border:none;
+	border-width:0;
 }
 
 .rightArrow {
@@ -102,9 +120,10 @@ image.vmiddle {
 	top:35%;
 	margin:0;
 	padding:0;	
-	opacity:.8;
-	z-index:6;
+	/*opacity:.8;*/
+	z-index:100;
 	border:none;
+	border-width:0;
 }
 
 .contentHolder {
@@ -113,7 +132,7 @@ image.vmiddle {
 	bottom:64px;
 	seamless:true;
 	border:none;
-	overflow:hidden;
+	overflow:visible;
 	width:100%;
 	min-width:100%;
 	max-width:100%;
@@ -124,9 +143,10 @@ image.vmiddle {
 	width:10770px;
 	max-width:10770px;
 	min-width:10770px;
-	height:100%;
+	/*height:100%;*/
 	seamless:true;
 	border:none;
+	overflow:hidden;
 	/*box-shadow: 0 0 20px rgba(0,0,0,0.2);*/
 }
 
@@ -141,32 +161,27 @@ h3 {
 }
 
 h3.intro {
-	background: rgb(0, 0, 0);
-	filter:alpha(opacity=20);
+	background: rgb(230, 230, 230);
 	background: rgba(0, 0, 0, .02);
 }
 
 h3.research {
-	background: rgb(70, 189, 45);
-	filter:alpha(opacity=50);
+	background: rgb(162, 222, 150);
 	background: rgba(70, 189, 45, .5);
 }
 
 h3.preclinical {
-	background: rgb(253, 196, 74);
-	filter:alpha(opacity=50);
+	background: rgb(254, 225, 164);
 	background: rgba(253, 196, 74, .5);
 }
 
 h3.clinical {
-	background: rgb(30, 129, 250);
-	filter:alpha(opacity=50);
+	background: rgb(142, 192, 252);
 	background: rgba(30, 129, 250, .5);
 }
 
 h3.approval {
-	background: rgb(219, 48, 32);
-	filter:alpha(opacity=50);
+	background: rgb(237, 151, 143);
 	background: rgba(219, 48, 32, .5);
 }
 
@@ -178,10 +193,15 @@ div.intro {
 	margin:30px;
 	width:960px;
 	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
-	filter:alpha(opacity=80);
-    background: rgba(255, 255, 255, .8);
-	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	filter:alpha(opacity=90);
+	background: rgba(255, 255, 255, .8);
 	overflow:hidden;
+	/*shadow*/
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888');
 }
 
 div.research {
@@ -192,10 +212,15 @@ div.research {
 	float:left;
 	margin:30px;
 	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
-	filter:alpha(opacity=80);
-    background: rgba(255, 255, 255, .8);
-	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	filter:alpha(opacity=90);
+	background: rgba(255, 255, 255, .8);
 	overflow:hidden;
+	/*shadow*/
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888');
 }
 
 div.preclinical {
@@ -206,10 +231,15 @@ div.preclinical {
 	float:left;
 	margin:30px;
 	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
-	filter:alpha(opacity=80);
-    background: rgba(255, 255, 255, .8);
-	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	filter:alpha(opacity=90);
+	background: rgba(255, 255, 255, .8);
 	overflow:hidden;
+	/*shadow*/
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888');
 }
 
 div.clinical {
@@ -220,10 +250,15 @@ div.clinical {
 	float:left;
 	margin:30px;
 	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
-	filter:alpha(opacity=80);
-    background: rgba(255, 255, 255, .8);
-	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	filter:alpha(opacity=90);
+	background: rgba(255, 255, 255, .8);
 	overflow:hidden;
+	/*shadow*/
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888');
 }
 
 div.approval {
@@ -234,10 +269,15 @@ div.approval {
 	float:left;
 	margin:30px;
 	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
-	filter:alpha(opacity=80);
-    background: rgba(255, 255, 255, .8);
-	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	filter:alpha(opacity=90);
+	background: rgba(255, 255, 255, .8);
 	overflow:hidden;
+	/*shadow*/
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888');
 }
 
 div.summary {
@@ -248,10 +288,15 @@ div.summary {
 	margin:30px;
 	width:400px;
 	background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
-	filter:alpha(opacity=80);
-    background: rgba(255, 255, 255, .8);
-	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	filter:alpha(opacity=90);
+	background: rgba(255, 255, 255, .8);
 	overflow:hidden;
+	/*shadow*/
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#888888');
 }
 
 div.defaultSlide {
@@ -271,7 +316,7 @@ span.introSection {
 	margin-top:0px;
 	margin-right:92.85714286%;
 	width:7.14285714%;
-	background: rgb(255, 255, 255);
+	background: rgb(240, 240, 240);
 	height:100%;
 	box-shadow:inset 0 0 40px rgba(0,0,0,0.2);
 }
@@ -282,7 +327,7 @@ span.summarySection {
 	margin-left:92.85714286%;
 	margin-right:0%;
 	width:7.14285714%;
-	background: rgb(255, 255, 255);
+	background: rgb(240, 240, 240);
 	height:100%;
 	box-shadow:inset 0 0 40px rgba(0,0,0,0.2);
 }
@@ -337,13 +382,18 @@ span.approval {
 
 /* -------------------------------------------------------------------------------- */
 
+a, img {text-decoration:none; outline:none; border:none;}
+a:link {text-decoration:none; border:none}
+a:visited {text-decoration:none; border:none}
+a:hover {text-decoration:none; border:none}
+a:active {text-decoration:none; border:none}
+
+/* -------------------------------------------------------------------------------- */
+
 @font-face {
     font-family: 'GeosansLightRegular';
     src: url('fonts/geosanslight-webfont.eot');
-    src: url('fonts/geosanslight-webfont.eot?#iefix') format('eot'),
-url('fonts/geosanslight-webfont.woff') format('woff'),
-url('fonts/geosanslight-webfont.ttf') format('truetype'),
-url('fonts/geosanslight-webfont.svg#webfontY02WmcuR') format('svg');
+    src: url('fonts/geosanslight-webfont.eot?#iefix') format('eot'), url('fonts/geosanslight-webfont.woff') format('woff'), url('fonts/geosanslight-webfont.ttf') format('truetype'), url('fonts/geosanslight-webfont.svg#webfontY02WmcuR') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -351,10 +401,11 @@ url('fonts/geosanslight-webfont.svg#webfontY02WmcuR') format('svg');
 @font-face {
     font-family: 'GeosansLightMediumItalic';
     src: url('fonts/geosanslight-oblique-webfont.eot');
-    src: url('fonts/geosanslight-oblique-webfont.eot?#iefix') format('eot'),
-url('fonts/geosanslight-oblique-webfont.woff') format('woff'),
-url('fonts/geosanslight-oblique-webfont.ttf') format('truetype'),
-url('fonts/geosanslight-oblique-webfont.svg#webfontNPsZNH0G') format('svg');
+    src: url('fonts/geosanslight-oblique-webfont.eot?#iefix') format('eot'), url('fonts/geosanslight-oblique-webfont.woff') format('woff'), url('fonts/geosanslight-oblique-webfont.ttf') format('truetype'), url('fonts/geosanslight-oblique-webfont.svg#webfontNPsZNH0G') format('svg');
     font-weight: normal;
     font-style: normal;
 }
+
+
+
+<!---------->
